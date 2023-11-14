@@ -1,0 +1,136 @@
+<?php
+require 'functions.php';
+
+$conn = mysqli_connect("localhost", "root", "", "cancerhero");
+
+
+$thread = query("SELECT *
+FROM news
+ORDER BY RAND()
+LIMIT 3");
+
+?>
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <!-- CSS Lainnya -->
+    <link rel="stylesheet" href="node_modules/bootstrap/css/navbar.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/css/body.css">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+    <title>News Page </title>
+  </head>
+  <body>
+    <!-- navbar menu -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container">
+        <a class="navbar-brand" href="index.php">
+          <img src="node_modules/img/CancerHero.svg" height="100%">
+        </a>
+        <button class="navbar-toggler mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="nav nav-pills col-lg-8 col-sm-5 text-center">
+            <li class="nav-item text-center">
+              <a class="nav-link link tebel-sedang" href="home.php">Home &nbsp;&nbsp;</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link link tebel-sedang" href="news.php">News &nbsp;&nbsp;</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link link tebel-sedang" href="about-us.php">About &nbsp;&nbsp;</a>
+            </li>
+          </ul>
+          <li class="nav nav-pills">
+            <div class="col-lg-25 col-sm-12">
+               
+            </div>
+          </li>
+        </div>
+      </div>
+    </nav>
+      <div class="container">
+        <h1 style="line-height: 100px; font-size: 64px;">What's Up</h1>
+          <hr border: 3px solid #C4C4C4;>
+            <div class="row">
+              <div class="row" data-aos="fade-up">
+                <div class="col-sm-8 stretch-card grid-margin">
+                  <div class="position-relative">
+                    <div class="card shadow-sm">
+                      <a href="#">
+                        <img src="node_modules/img/Rectangle 39.png" width="100%" height="330" alt="news">
+                      </a>
+                      <div class="card-body" style="background-color: rgba(0, 0, 0, 0.7);">
+                        <p class="card-text" style="color: white;">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <div class="col-xl-4 stretch-card grid-margin">
+                <div class="card text-black" style="background-color: #C7D3B5;">
+                  <div class="card-body">   
+                    <h2>Newest</h2>
+          <hr border: 3px solid #C4C4C4;>
+
+                     <?php $i =1; ?>
+                    <?php foreach($thread as $row) : ?>
+                      <div class="d-flex border-bottom-blue pt-3 pb-4 align-items-center justify-content-between">
+                        <div class="pr-3" style="line-height: 5px;">
+                          <p style="font-size: 14px;">
+                            12/12/2021
+                          </p>
+                          <h6>
+                          <?= $row["title"]; ?>
+                          </h6>
+                          <a href="<?= $row["link"]; ?>">
+                            <p style="text-align: right; color: black;">
+                              <b>
+                                Read more ->
+                              </b>
+                            </p>
+                          </a>              
+                            </p>
+                            </a>
+                        </div>
+                      </div>
+                    <?php endforeach; ?>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <br>
+          </div> 
+          <?php foreach($thread as $row) : ?>
+            <div class="col-sm-4">
+              <div class="card shadow-sm">
+                <a href="<?= $row["link"]; ?>">
+                  <img src="img/<?= $row["image"]; ?>" width="100%" height="225" alt="makanan">  
+                </a>
+                <div class="card-body" style="background-color: rgba(0, 0, 0, 0.7);">
+                <p class="card-text" style="color: white;"><?= $row["title"]; ?></p>
+                </div>              
+              </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <br>
+    <div style="background-image: url(node_modules/img/footer.png);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        padding-top: 265px;
+        padding-bottom: 10px;
+        "></div>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
